@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Spread the Passion — Make giving part of your living</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Plus+Jakarta+Sans:ital,wght@0,400..800;1,400..600&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#90B738;
+    --green-deep:#6F9320;
+    --purple:#88368B;
+    --purple-deep:#6B2270;
+    --ink:#22232A;
+    --slate:#56575F;
+    --cream:#FBFAF4;
+    --cream-2:#F3F1E7;
+    --white:#ffffff;
+    --shadow:rgba(34,35,42,.10);
+    --font-display:'Bricolage Grotesque',sans-serif;
+    --font-body:'Plus Jakarta Sans',sans-serif;
+    --maxw:1200px;
+  }
+  html[lang="ar"]{ --font-display:'Tajawal',sans-serif; --font-body:'Tajawal',sans-serif; }
+
+  *{margin:0;padding:0;box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  body{
+    font-family:var(--font-body);
+    background:var(--cream);
+    color:var(--ink);
+    line-height:1.6;
+    overflow-x:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  /* subtle paper grain */
+  body::before{
+    content:"";position:fixed;inset:0;z-index:0;pointer-events:none;opacity:.4;
+    background-image:radial-gradient(rgba(34,35,42,.025) 1px, transparent 1px);
+    background-size:4px 4px;
+  }
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 28px;position:relative;z-index:1}
+  h1,h2,h3{font-family:var(--font-display);line-height:1.04;letter-spacing:-.02em;font-weight:700}
+  html[lang="ar"] h1,html[lang="ar"] h2,html[lang="ar"] h3{letter-spacing:0;line-height:1.2}
+  a{color:inherit;text-decoration:none}
+  .ar{display:none}
+  html[lang="ar"] .en{display:none}
+  html[lang="ar"] .ar{display:inline}
+  html[lang="ar"] .ar.block{display:block}
+
+  /* ---------- NAV ---------- */
+  header.nav{
+    position:sticky;top:0;z-index:50;
+    backdrop-filter:saturate(1.4) blur(12px);
+    background:rgba(251,250,244,.82);
+    border-bottom:1px solid rgba(34,35,42,.07);
+  }
+  .nav-inner{display:flex;align-items:center;justify-content:space-between;gap:18px;height:74px}
+  .brand{display:flex;align-items:center;gap:12px;font-family:var(--font-display);font-weight:700}
+  .brand img{height:46px;width:auto;display:block;border-radius:8px}
+  .brand .bn{font-size:1.05rem;line-height:1;letter-spacing:-.01em}
+  .brand .bn small{display:block;font-family:var(--font-body);font-weight:600;font-size:.62rem;letter-spacing:.18em;color:var(--purple);margin-top:3px;text-transform:uppercase}
+  nav.links{display:flex;align-items:center;gap:28px}
+  nav.links a{font-size:.92rem;font-weight:600;color:var(--slate);position:relative;transition:color .2s}
+  nav.links a::after{content:"";position:absolute;left:0;bottom:-6px;height:2px;width:0;background:var(--green);transition:width .25s}
+  nav.links a:hover{color:var(--ink)}
+  nav.links a:hover::after{width:100%}
+  .nav-cta{display:flex;align-items:center;gap:12px}
+  .langtoggle{
+    display:flex;border:1.5px solid rgba(34,35,42,.16);border-radius:999px;overflow:hidden;font-weight:700;font-size:.78rem
+  }
+  .langtoggle button{
+    background:none;border:none;cursor:pointer;padding:7px 13px;color:var(--slate);font-family:var(--font-body);font-weight:700;transition:.2s
+  }
+  .langtoggle button.active{background:var(--ink);color:#fff}
+  .btn{
+    display:inline-flex;align-items:center;gap:9px;border:none;cursor:pointer;
+    font-family:var(--font-body);font-weight:700;font-size:.92rem;
+    padding:13px 22px;border-radius:999px;transition:transform .2s,box-shadow .2s,background .2s;
+  }
+  .btn-primary{background:var(--green);color:#1c2606;box-shadow:0 8px 22px rgba(144,183,56,.4)}
+  .btn-primary:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(144,183,56,.5)}
+  .btn-purple{background:var(--purple);color:#fff;box-shadow:0 8px 22px rgba(136,54,139,.35)}
+  .btn-purple:hover{transform:translateY(-2px);box-shadow:0 14px 30px rgba(136,54,139,.45)}
+  .btn-ghost{background:transparent;border:1.6px solid rgba(34,35,42,.18);color:var(--ink)}
+  .btn-ghost:hover{border-color:var(--ink);transform:translateY(-2px)}
+  .menu-btn{display:none}
+
+  /* ---------- HERO ---------- */
+  .hero{position:relative;padding:78px 0 90px;overflow:hidden}
+  .hero .blob{position:absolute;border-radius:50%;filter:blur(8px);opacity:.85;z-index:0}
+  .b1{width:380px;height:380px;background:radial-gradient(circle at 30% 30%,#a9d24f,#90B738);top:-120px;right:-90px;animation:float1 14s ease-in-out infinite}
+  .b2{width:300px;height:300px;background:radial-gradient(circle at 40% 40%,#a248a6,#88368B);bottom:-110px;left:-80px;animation:float2 17s ease-in-out infinite}
+  .b3{width:140px;height:140px;background:#90B738;opacity:.18;top:40%;left:8%;animation:float1 11s ease-in-out infinite}
+  @keyframes float1{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(34px) translateX(-22px)}}
+  @keyframes float2{0%,100%{transform:translateY(0) translateX(0)}50%{transform:translateY(-30px) translateX(26px)}}
+  .hero-grid{display:grid;grid-template-columns:1.15fr .85fr;gap:48px;align-items:center;position:relative;z-index:2}
+  .eyebrow{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:.78rem;letter-spacing:.16em;text-transform:uppercase;color:var(--purple);background:#fff;border:1px solid rgba(136,54,139,.2);padding:8px 15px;border-radius:999px;box-shadow:0 4px 14px var(--shadow)}
+  html[lang="ar"] .eyebrow{letter-spacing:.02em}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--green);box-shadow:0 0 0 4px rgba(144,183,56,.25)}
+  .hero h1{font-size:clamp(2.7rem,6vw,4.5rem);margin:24px 0 0}
+  .hero h1 .hl{color:var(--green-deep);position:relative;white-space:nowrap}
+  .hero h1 .hl2{color:var(--purple)}
+  .hero p.lead{font-size:1.15rem;color:var(--slate);max-width:36ch;margin:22px 0 32px;font-weight:500}
+  .hero-cta{display:flex;gap:14px;flex-wrap:wrap}
+  .hero-art{position:relative;display:flex;justify-content:center}
+  .art-card{
+    width:100%;max-width:380px;aspect-ratio:1/1.05;border-radius:34px;position:relative;
+    background:linear-gradient(150deg,var(--purple),var(--purple-deep));
+    box-shadow:0 30px 70px rgba(136,54,139,.4);overflow:hidden;
+  }
+  .art-card .ring{position:absolute;border:2px dashed rgba(255,255,255,.25);border-radius:50%}
+  .ringa{width:120%;height:120%;left:-10%;top:-10%;animation:spin 40s linear infinite}
+  .ringb{width:78%;height:78%;left:11%;top:11%;animation:spin 28s linear infinite reverse}
+  @keyframes spin{to{transform:rotate(360deg)}}
+  .figure{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:54%}
+  .figure svg{width:100%;height:auto;display:block;filter:drop-shadow(0 10px 20px rgba(0,0,0,.25))}
+  .corner-chip{position:absolute;background:var(--green);color:#1c2606;font-family:var(--font-display);font-weight:700;border-radius:18px;padding:14px 18px;box-shadow:0 14px 30px rgba(144,183,56,.45);z-index:3}
+  .chip-tl{top:8px;left:-14px;font-size:.95rem;animation:float2 9s ease-in-out infinite}
+  .chip-br{bottom:14px;right:-10px;background:#fff;color:var(--purple);animation:float1 10s ease-in-out infinite}
+  .chip-br b{font-size:1.4rem;display:block;font-family:var(--font-display)}
+
+  /* ---------- STATS STRIP ---------- */
+  .stats{background:var(--ink);color:#fff;padding:0}
+  .stats-inner{display:grid;grid-template-columns:repeat(4,1fr);gap:0;text-align:center}
+  .stat{padding:38px 18px;border-right:1px solid rgba(255,255,255,.1)}
+  .stat:last-child{border-right:none}
+  .stat .num{font-family:var(--font-display);font-size:2.5rem;font-weight:800;color:var(--green);line-height:1}
+  .stat .num.p{color:#cd7ad0}
+  .stat .lbl{font-size:.82rem;color:#b9bac2;margin-top:8px;font-weight:600;letter-spacing:.04em}
+
+  /* ---------- SECTIONS ---------- */
+  section.block{padding:96px 0}
+  .sec-head{max-width:680px;margin-bottom:54px}
+  .sec-tag{font-weight:800;font-size:.8rem;letter-spacing:.18em;text-transform:uppercase;color:var(--green-deep)}
+  html[lang="ar"] .sec-tag{letter-spacing:.03em}
+  .sec-head h2{font-size:clamp(2rem,4vw,3rem);margin:14px 0 16px}
+  .sec-head p{color:var(--slate);font-size:1.08rem}
+
+  /* about */
+  .about-grid{display:grid;grid-template-columns:1fr 1fr;gap:56px;align-items:center}
+  .about-visual{position:relative;border-radius:28px;background:linear-gradient(150deg,#a9d24f,var(--green));aspect-ratio:4/3.4;overflow:hidden;box-shadow:0 26px 60px rgba(144,183,56,.35)}
+  .about-visual .yr{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);text-align:center;color:#1c2606}
+  .about-visual .yr b{font-family:var(--font-display);font-size:6rem;font-weight:800;line-height:.9;display:block}
+  .about-visual .yr span{font-weight:700;letter-spacing:.1em;text-transform:uppercase;font-size:.9rem}
+  .about-visual .pat{position:absolute;inset:0;background:repeating-linear-gradient(45deg,transparent 0 22px,rgba(255,255,255,.07) 22px 44px)}
+  .about-text p{color:var(--slate);font-size:1.08rem;margin-bottom:18px}
+  .about-text h2{margin-bottom:18px}
+  .quote{border-inline-start:4px solid var(--purple);padding-inline-start:20px;margin-top:26px;font-family:var(--font-display);font-style:italic;font-size:1.25rem;color:var(--ink)}
+  html[lang="ar"] .quote{font-style:normal;font-weight:700}
+  .quote cite{display:block;font-family:var(--font-body);font-style:normal;font-size:.9rem;color:var(--slate);margin-top:8px;font-weight:600}
+
+  /* pillars */
+  .pillars{background:var(--cream-2)}
+  .pillar-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px}
+  .pillar{background:#fff;border-radius:22px;padding:34px 28px;box-shadow:0 12px 34px var(--shadow);border:1px solid rgba(34,35,42,.05);transition:transform .25s,box-shadow .25s}
+  .pillar:hover{transform:translateY(-6px);box-shadow:0 22px 48px rgba(34,35,42,.14)}
+  .pillar .ic{width:60px;height:60px;border-radius:16px;display:grid;place-items:center;margin-bottom:20px}
+  .pillar:nth-child(1) .ic{background:rgba(144,183,56,.16)}
+  .pillar:nth-child(2) .ic{background:rgba(136,54,139,.14)}
+  .pillar:nth-child(3) .ic{background:rgba(144,183,56,.16)}
+  .pillar h3{font-size:1.35rem;margin-bottom:10px}
+  .pillar p{color:var(--slate);font-size:.98rem}
+
+  /* programs */
+  .prog-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px}
+  .prog{position:relative;border-radius:24px;padding:34px 30px;overflow:hidden;color:#fff;min-height:230px;display:flex;flex-direction:column;justify-content:flex-end;box-shadow:0 18px 44px var(--shadow);transition:transform .25s}
+  .prog:hover{transform:translateY(-6px)}
+  .prog .ptag{font-size:.74rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.85;margin-bottom:10px}
+  html[lang="ar"] .prog .ptag{letter-spacing:.02em}
+  .prog h3{font-size:1.6rem;margin-bottom:10px}
+  .prog p{font-size:.98rem;opacity:.94;max-width:42ch}
+  .prog .bg-decor{position:absolute;border-radius:50%;opacity:.2}
+  .pg1{background:linear-gradient(140deg,#88368B,#6B2270)}
+  .pg2{background:linear-gradient(140deg,#90B738,#6F9320)}
+  .pg3{background:linear-gradient(140deg,#2f3140,#22232A)}
+  .pg4{background:linear-gradient(140deg,#a248a6,#88368B)}
+  .prog .bg-decor.a{width:200px;height:200px;background:#fff;top:-60px;right:-40px}
+  .prog .bg-decor.b{width:120px;height:120px;background:#fff;bottom:-30px;left:30%}
+
+  /* partners */
+  .partners{background:var(--ink);color:#fff}
+  .partners .sec-head h2{color:#fff}
+  .partners .sec-tag{color:var(--green)}
+  .partners .sec-head p{color:#b9bac2}
+  .plist{display:flex;flex-wrap:wrap;gap:14px}
+  .pchip{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:14px;padding:16px 22px;font-weight:700;font-size:.98rem;transition:.2s}
+  .pchip:hover{background:rgba(144,183,56,.16);border-color:var(--green)}
+
+  /* CTA */
+  .cta{position:relative;overflow:hidden}
+  .cta-card{background:linear-gradient(135deg,var(--green) 0%,var(--green-deep) 48%,var(--purple) 120%);border-radius:34px;padding:64px 56px;text-align:center;position:relative;overflow:hidden;box-shadow:0 30px 70px rgba(136,54,139,.3)}
+  .cta-card::before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(-45deg,transparent 0 30px,rgba(255,255,255,.05) 30px 60px)}
+  .cta-card h2{color:#fff;font-size:clamp(2rem,4vw,3rem);position:relative;margin-bottom:14px}
+  .cta-card p{color:rgba(255,255,255,.92);font-size:1.12rem;max-width:46ch;margin:0 auto 30px;position:relative}
+  .cta-card .hero-cta{justify-content:center;position:relative}
+  .cta-card .btn-primary{background:#fff;color:var(--purple)}
+  .cta-card .btn-ghost{border-color:rgba(255,255,255,.6);color:#fff}
+
+  /* contact / footer */
+  footer{background:var(--ink);color:#cfd0d7;padding:70px 0 30px}
+  .foot-grid{display:grid;grid-template-columns:1.4fr 1fr 1fr;gap:40px;margin-bottom:46px}
+  .foot-brand img{height:54px;border-radius:10px;background:#fff;padding:5px;margin-bottom:16px}
+  .foot-brand p{color:#9a9ba4;max-width:34ch;font-size:.96rem}
+  footer h4{color:#fff;font-family:var(--font-display);font-size:1.05rem;margin-bottom:16px}
+  .foot-col a,.foot-col p{display:block;color:#b9bac2;margin-bottom:11px;font-size:.95rem;transition:color .2s}
+  .foot-col a:hover{color:var(--green)}
+  .socials{display:flex;gap:12px;margin-top:6px}
+  .socials a{width:42px;height:42px;border-radius:12px;background:rgba(255,255,255,.07);display:grid;place-items:center;transition:.2s}
+  .socials a:hover{background:var(--green);color:#1c2606;transform:translateY(-3px)}
+  .wa{display:inline-flex;align-items:center;gap:10px;background:rgba(144,183,56,.15);border:1px solid rgba(144,183,56,.4);color:#fff;padding:11px 18px;border-radius:12px;font-weight:700;margin-top:4px}
+  .foot-bot{border-top:1px solid rgba(255,255,255,.1);padding-top:24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;font-size:.85rem;color:#82838c}
+
+  /* reveal */
+  .reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.2,.7,.3,1),transform .7s cubic-bezier(.2,.7,.3,1)}
+  .reveal.in{opacity:1;transform:none}
+
+  /* responsive */
+  @media(max-width:920px){
+    .hero-grid,.about-grid{grid-template-columns:1fr;gap:40px}
+    .hero-art{order:-1;max-width:340px;margin:0 auto}
+    .pillar-grid,.prog-grid,.foot-grid{grid-template-columns:1fr}
+    .stats-inner{grid-template-columns:1fr 1fr}
+    .stat:nth-child(2){border-right:none}
+    .stat{border-bottom:1px solid rgba(255,255,255,.1)}
+    nav.links{display:none}
+    .nav-cta .btn{display:none}
+  }
+  @media(max-width:560px){
+    .wrap{padding:0 18px}
+    .cta-card{padding:44px 26px}
+    .brand .bn{font-size:.95rem}
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav">
+  <div class="wrap nav-inner">
+    <a class="brand" href="#top" aria-label="Spread the Passion home">
+      <img src="data:image/png;base64,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" alt="Spread the Passion logo">
+      <span class="bn">Spread the Passion<small class="en">Make giving part of your living</small><small class="ar">اجعل العطاء جزءاً من حياتك</small></span>
+    </a>
+    <nav class="links">
+      <a href="#about"><span class="en">About</span><span class="ar">من نحن</span></a>
+      <a href="#what"><span class="en">What We Do</span><span class="ar">ماذا نفعل</span></a>
+      <a href="#programs"><span class="en">Programs</span><span class="ar">برامجنا</span></a>
+      <a href="#partners"><span class="en">Partners</span><span class="ar">شركاؤنا</span></a>
+      <a href="#contact"><span class="en">Contact</span><span class="ar">تواصل معنا</span></a>
+    </nav>
+    <div class="nav-cta">
+      <div class="langtoggle" role="group" aria-label="Language">
+        <button id="lang-en" class="active" onclick="setLang('en')">EN</button>
+        <button id="lang-ar" onclick="setLang('ar')">ع</button>
+      </div>
+      <a href="#contact" class="btn btn-primary"><span class="en">Volunteer</span><span class="ar">تطوّع معنا</span></a>
+    </div>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- HERO -->
+<section class="hero">
+  <span class="blob b1"></span><span class="blob b2"></span><span class="blob b3"></span>
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <span class="eyebrow"><span class="dot"></span><span class="en">Non-profit · Kuwait · Since 2010</span><span class="ar">منظمة غير ربحية · الكويت · منذ ٢٠١٠</span></span>
+      <h1>
+        <span class="en">Make giving part of your <span class="hl">living</span>.</span>
+        <span class="ar block">اجعل <span class="hl">العطاء</span> جزءاً من حياتك.</span>
+      </h1>
+      <p class="lead">
+        <span class="en">We connect passionate volunteers with meaningful opportunities — and help them grow the skills to serve their community.</span>
+        <span class="ar">نربط المتطوعين الشغوفين بفرص تطوعية ذات معنى، ونساعدهم على تطوير مهاراتهم في خدمة المجتمع.</span>
+      </p>
+      <div class="hero-cta">
+        <a href="#contact" class="btn btn-purple">
+          <span class="en">Become a Volunteer</span><span class="ar">انضم كمتطوّع</span>
+          <span aria-hidden="true">→</span>
+        </a>
+        <a href="#programs" class="btn btn-ghost"><span class="en">Explore Programs</span><span class="ar">تصفّح البرامج</span></a>
+      </div>
+    </div>
+    <div class="hero-art">
+      <div class="art-card">
+        <span class="ring ringa"></span><span class="ring ringb"></span>
+        <div class="figure">
+          <!-- energetic person motif inspired by the logo -->
+          <svg viewBox="0 0 120 150" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+            <circle cx="74" cy="22" r="15" fill="#fff"/>
+            <path d="M62 40 C40 44 30 30 18 36 C26 50 44 52 58 50 L40 96 C34 112 50 120 56 104 L66 74 L74 104 C80 122 98 116 92 98 L78 52 C96 56 112 46 110 30 C98 38 86 30 70 42 Z" fill="#fff"/>
+          </svg>
+        </div>
+        <div class="corner-chip chip-tl"><span class="en">12+ years</span><span class="ar">+١٢ سنة</span></div>
+        <div class="corner-chip chip-br"><b>1000+</b><span class="en">volunteers</span><span class="ar">متطوّع</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<section class="stats">
+  <div class="wrap"><div class="stats-inner">
+    <div class="stat"><div class="num">12+</div><div class="lbl"><span class="en">Years of impact</span><span class="ar">سنوات من العطاء</span></div></div>
+    <div class="stat"><div class="num p">1000+</div><div class="lbl"><span class="en">Active community</span><span class="ar">مجتمع نشط</span></div></div>
+    <div class="stat"><div class="num">10+</div><div class="lbl"><span class="en">Campaigns & programs</span><span class="ar">حملات وبرامج</span></div></div>
+    <div class="stat"><div class="num p">6+</div><div class="lbl"><span class="en">National & UN partners</span><span class="ar">شركاء محليون ودوليون</span></div></div>
+  </div></div>
+</section>
+
+<!-- ABOUT -->
+<section class="block" id="about">
+  <div class="wrap about-grid">
+    <div class="about-visual reveal">
+      <div class="pat"></div>
+      <div class="yr"><b class="en">12</b><b class="ar">١٢</b><span class="en">Years of giving</span><span class="ar">سنة من العطاء</span></div>
+    </div>
+    <div class="about-text reveal">
+      <span class="sec-tag"><span class="en">Who We Are</span><span class="ar">من نحن</span></span>
+      <h2><span class="en">A home for volunteers who want to make a difference.</span><span class="ar">بيتٌ للمتطوّعين الراغبين في إحداث فرق.</span></h2>
+      <p>
+        <span class="en">Spread the Passion is a not-for-profit organization established around 12 years ago with one purpose: to connect volunteers with opportunities and develop their skills in serving the community.</span>
+        <span class="ar">منظمة سبرد ذا باشن هي منظمة غير هادفة للربح تأسست منذ تقريباً ١٢ سنة بهدف واحد: ربط المتطوعين بفرص تطوعية وتطوير مهاراتهم في خدمة المجتمع.</span>
+      </p>
+      <p>
+        <span class="en">From public-health campaigns and major sporting events to heritage and youth initiatives, we turn passion into purposeful action across Kuwait — partnering with national institutions and the United Nations along the way.</span>
+        <span class="ar">من حملات الصحة العامة والفعاليات الرياضية الكبرى إلى مبادرات التراث والشباب، نحوّل الشغف إلى عملٍ هادف في جميع أنحاء الكويت — بالشراكة مع مؤسسات وطنية والأمم المتحدة.</span>
+      </p>
+      <blockquote class="quote">
+        <span class="en">“We focus on events that benefit volunteers with skills that improve their lives.”</span>
+        <span class="ar">«نركّز على الفعاليات التي تُكسب المتطوّعين مهاراتٍ تُحسّن حياتهم.»</span>
+        <cite>— Dr. Fatemah Al-Mosawi · <span class="en">Founder</span><span class="ar">المؤسِّسة</span></cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- WHAT WE DO / PILLARS -->
+<section class="block pillars" id="what">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag"><span class="en">What We Do</span><span class="ar">ماذا نفعل</span></span>
+      <h2><span class="en">Connect. Develop. Serve.</span><span class="ar">نربط. نطوّر. نخدم.</span></h2>
+      <p><span class="en">Three things sit at the heart of everything we build.</span><span class="ar">ثلاثة محاور تقع في قلب كل ما نقوم به.</span></p>
+    </div>
+    <div class="pillar-grid">
+      <div class="pillar reveal">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6F9320" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <h3><span class="en">Connect volunteers</span><span class="ar">ربط المتطوّعين</span></h3>
+        <p><span class="en">We match passionate people with the right volunteering opportunities — so giving fits naturally into everyday life.</span><span class="ar">نوصل الأشخاص الشغوفين بالفرص التطوعية المناسبة، ليصبح العطاء جزءاً طبيعياً من الحياة اليومية.</span></p>
+      </div>
+      <div class="pillar reveal">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#88368B" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20l9-5-9-5-9 5 9 5z"/><path d="M12 12l9-5-9-5-9 5 9 5z"/><path d="M3 15v4"/></svg></div>
+        <h3><span class="en">Develop skills</span><span class="ar">تطوير المهارات</span></h3>
+        <p><span class="en">Every initiative is designed to build real skills — leadership, teamwork and communication — that improve volunteers' lives.</span><span class="ar">صُمِّمت كل مبادرة لبناء مهاراتٍ حقيقية كالقيادة والعمل الجماعي والتواصل، لتُحسّن حياة المتطوّعين.</span></p>
+      </div>
+      <div class="pillar reveal">
+        <div class="ic"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#6F9320" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg></div>
+        <h3><span class="en">Serve the community</span><span class="ar">خدمة المجتمع</span></h3>
+        <p><span class="en">From public health to heritage and sport, our volunteers create lasting, positive impact across Kuwaiti society.</span><span class="ar">من الصحة العامة إلى التراث والرياضة، يصنع متطوّعونا أثراً إيجابياً دائماً في المجتمع الكويتي.</span></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROGRAMS -->
+<section class="block" id="programs">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag"><span class="en">Programs & Campaigns</span><span class="ar">البرامج والحملات</span></span>
+      <h2><span class="en">Where passion meets purpose.</span><span class="ar">حيث يلتقي الشغف بالهدف.</span></h2>
+      <p><span class="en">A selection of the initiatives our volunteers have powered over the years.</span><span class="ar">مجموعة مختارة من المبادرات التي قادها متطوّعونا على مرّ السنين.</span></p>
+    </div>
+    <div class="prog-grid">
+      <article class="prog pg1 reveal">
+        <span class="bg-decor a"></span><span class="bg-decor b"></span>
+        <div class="ptag"><span class="en">Public Health · with UN Kuwait, WHO & UNICEF</span><span class="ar">صحة عامة · مع الأمم المتحدة ومنظمة الصحة العالمية واليونيسف</span></div>
+        <h3><span class="en">Keep Going Campaign</span><span class="ar">حملة «لنستمر»</span></h3>
+        <p><span class="en">A behavioral-science campaign promoting public-health awareness during COVID-19, producing multilingual tools, posters and animated media for schools and workplaces.</span><span class="ar">حملة قائمة على العلوم السلوكية لتعزيز الوعي الصحي خلال جائحة كوفيد-١٩، أنتجت أدوات ومُلصقات ومحتوى متعدد اللغات للمدارس وأماكن العمل.</span></p>
+      </article>
+      <article class="prog pg2 reveal">
+        <span class="bg-decor a"></span><span class="bg-decor b"></span>
+        <div class="ptag"><span class="en">Sport & Wellness</span><span class="ar">الرياضة والعافية</span></div>
+        <h3><span class="en">RunKuwait</span><span class="ar">ران الكويت</span></h3>
+        <p><span class="en">Mobilizing volunteers for Kuwait's premier running events — building social responsibility and health awareness while developing event-management skills.</span><span class="ar">حشد المتطوّعين لأبرز فعاليات الجري في الكويت، لتعزيز المسؤولية الاجتماعية والوعي الصحي وتطوير مهارات إدارة الفعاليات.</span></p>
+      </article>
+      <article class="prog pg3 reveal">
+        <span class="bg-decor a"></span><span class="bg-decor b"></span>
+        <div class="ptag"><span class="en">Giving Program</span><span class="ar">برنامج العطاء</span></div>
+        <h3><span class="en">Paths of Giving</span><span class="ar">روافد العطاء</span></h3>
+        <p><span class="en">A structured program that channels volunteers toward causes that matter — turning generosity into organized, sustainable action.</span><span class="ar">برنامج منظّم يوجّه المتطوّعين نحو القضايا المهمة، ويحوّل الكرم إلى عملٍ مُنظّم ومستدام.</span></p>
+      </article>
+      <article class="prog pg4 reveal">
+        <span class="bg-decor a"></span><span class="bg-decor b"></span>
+        <div class="ptag"><span class="en">Heritage & Ideas</span><span class="ar">التراث والأفكار</span></div>
+        <h3><span class="en">Heritage & TEDx</span><span class="ar">التراث وتيدكس</span></h3>
+        <p><span class="en">Preserving Kuwaiti heritage with partners like Bayt Al-Sadu, and powering knowledge-sharing platforms such as TEDxAlShuwaikh.</span><span class="ar">الحفاظ على التراث الكويتي مع شركاء مثل بيت السدو، ودعم منصّات تبادل المعرفة مثل تيدكس الشويخ.</span></p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERS -->
+<section class="block partners" id="partners">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <span class="sec-tag"><span class="en">Our Partners</span><span class="ar">شركاؤنا</span></span>
+      <h2><span class="en">Trusted by leading institutions.</span><span class="ar">موثوقون من قِبل مؤسسات رائدة.</span></h2>
+      <p><span class="en">We collaborate with national and international organizations to amplify volunteer impact.</span><span class="ar">نتعاون مع جهات وطنية ودولية لتعظيم أثر العمل التطوّعي.</span></p>
+    </div>
+    <div class="plist reveal">
+      <span class="pchip"><span class="en">United Nations — Kuwait</span><span class="ar">الأمم المتحدة — الكويت</span></span>
+      <span class="pchip">WHO</span>
+      <span class="pchip">UNICEF</span>
+      <span class="pchip"><span class="en">KFAS</span><span class="ar">مؤسسة الكويت للتقدم العلمي</span></span>
+      <span class="pchip"><span class="en">Voluntary Work Center</span><span class="ar">مركز العمل التطوعي</span></span>
+      <span class="pchip"><span class="en">Ministry of Youth Affairs</span><span class="ar">وزارة شؤون الشباب</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="block cta">
+  <div class="wrap">
+    <div class="cta-card reveal">
+      <h2><span class="en">Ready to spread the passion?</span><span class="ar">هل أنت مستعد لنشر الشغف؟</span></h2>
+      <p><span class="en">Join a community of 1,000+ volunteers turning passion into purpose across Kuwait. Your skills are needed.</span><span class="ar">انضم إلى مجتمع يضم أكثر من ١٠٠٠ متطوّع يحوّلون الشغف إلى هدفٍ في جميع أنحاء الكويت. نحتاج مهاراتك.</span></p>
+      <div class="hero-cta">
+        <a href="https://wa.me/96555725755" target="_blank" rel="noopener" class="btn btn-primary"><span class="en">Message us on WhatsApp</span><span class="ar">راسلنا عبر واتساب</span></a>
+        <a href="https://instagram.com/spreadpassion" target="_blank" rel="noopener" class="btn btn-ghost"><span class="en">Follow @spreadpassion</span><span class="ar">تابعنا @spreadpassion</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- FOOTER / CONTACT -->
+<footer id="contact">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <img src="data:image/png;base64,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" alt="Spread the Passion logo">
+        <p><span class="en">A Kuwaiti not-for-profit connecting volunteers with opportunities and developing their skills in serving the community — since 2010.</span><span class="ar">منظمة كويتية غير ربحية تربط المتطوّعين بالفرص وتطوّر مهاراتهم في خدمة المجتمع — منذ عام ٢٠١٠.</span></p>
+        <div class="socials" style="margin-top:18px">
+          <a href="https://instagram.com/spreadpassion" target="_blank" rel="noopener" aria-label="Instagram"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg></a>
+          <a href="https://x.com/spreadpassion" target="_blank" rel="noopener" aria-label="X / Twitter"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24h-6.66l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231 5.45-6.231Zm-1.161 17.52h1.833L7.084 4.126H5.117l11.966 15.644Z"/></svg></a>
+          <a href="https://wa.me/96555725755" target="_blank" rel="noopener" aria-label="WhatsApp"><svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M.057 24l1.687-6.163a11.867 11.867 0 0 1-1.587-5.946C.16 5.335 5.495 0 12.05 0a11.82 11.82 0 0 1 8.413 3.488 11.82 11.82 0 0 1 3.48 8.42c-.003 6.557-5.338 11.892-11.893 11.892a11.9 11.9 0 0 1-5.688-1.448L.057 24zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884a9.86 9.86 0 0 0 1.512 5.26l-.999 3.648 3.976-1.607zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.247-.694.247-1.289.173-1.413z"/></svg></a>
+        </div>
+      </div>
+      <div class="foot-col">
+        <h4><span class="en">Explore</span><span class="ar">استكشف</span></h4>
+        <a href="#about"><span class="en">About us</span><span class="ar">من نحن</span></a>
+        <a href="#what"><span class="en">What we do</span><span class="ar">ماذا نفعل</span></a>
+        <a href="#programs"><span class="en">Programs</span><span class="ar">برامجنا</span></a>
+        <a href="#partners"><span class="en">Partners</span><span class="ar">شركاؤنا</span></a>
+      </div>
+      <div class="foot-col">
+        <h4><span class="en">Get in touch</span><span class="ar">تواصل معنا</span></h4>
+        <p><span class="en">Kuwait</span><span class="ar">الكويت</span></p>
+        <a href="tel:+96555725755" dir="ltr">+965 5572 5755</a>
+        <a href="https://spreadthepassion.org" target="_blank" rel="noopener">spreadthepassion.org</a>
+        <a href="https://wa.me/96555725755" class="wa" target="_blank" rel="noopener"><span class="en">WhatsApp us</span><span class="ar">واتساب</span> · 55725755</a>
+      </div>
+    </div>
+    <div class="foot-bot">
+      <span>© <span id="yr"></span> Spread the Passion · <span class="en">All rights reserved.</span><span class="ar">جميع الحقوق محفوظة.</span></span>
+      <span><span class="en">Make giving part of your living.</span><span class="ar">اجعل العطاء جزءاً من حياتك.</span></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+  function setLang(lang){
+    const html=document.documentElement;
+    html.lang=lang;
+    html.dir = lang==='ar' ? 'rtl' : 'ltr';
+    document.getElementById('lang-en').classList.toggle('active',lang==='en');
+    document.getElementById('lang-ar').classList.toggle('active',lang==='ar');
+    try{localStorage.setItem('stp-lang',lang)}catch(e){}
+  }
+  (function(){
+    let saved='en';
+    try{saved=localStorage.getItem('stp-lang')||'en'}catch(e){}
+    if(saved==='ar') setLang('ar');
+  })();
+  document.getElementById('yr').textContent=new Date().getFullYear();
+
+  // reveal on scroll
+  const io=new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} });
+  },{threshold:.15});
+  document.querySelectorAll('.reveal').forEach((el,i)=>{ el.style.transitionDelay=(i%3*70)+'ms'; io.observe(el); });
+</script>
+</body>
+</html>
